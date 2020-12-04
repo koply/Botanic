@@ -1,9 +1,10 @@
 package me.koply.botanic.console;
 
+
+import jline.console.ConsoleReader;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 public interface IConsoleCommand {
@@ -12,7 +13,7 @@ public interface IConsoleCommand {
     default void handle(ConsoleParams p) {}
 
     default void register(IConsoleCommand clazz) {
-        HashMap<String, IConsoleCommand> commandsPtr = ConsoleService.getInstance().getConsoleCommands();
+        HashMap<String, IConsoleCommand> commandsPtr = ConsoleService.getConsoleCommands();
         for (String s : clazz.aliases) {
             commandsPtr.put(s,clazz);
         }
@@ -24,17 +25,14 @@ public interface IConsoleCommand {
     default String getDescription() { return description; }
 
     final class ConsoleParams {
-        public ConsoleParams(Scanner sc, Logger logger) {
-            this.sc = sc;
-            this.logger = logger;
+        public ConsoleParams(ConsoleService service) {
+            this.rd = service.getReader();
+            this.logger = service.getLogger();
         }
-        private final Scanner sc;
+        private final ConsoleReader rd;
+        public final ConsoleReader getReader() { return rd;}
+
         private final Logger logger;
-
-        public final Scanner getSc() {
-            return sc;
-        }
-
         public final Logger getLogger() {
             return logger;
         }

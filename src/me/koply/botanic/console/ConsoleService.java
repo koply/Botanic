@@ -1,45 +1,49 @@
 package me.koply.botanic.console;
 
-import me.koply.botanic.Main;
+import jline.console.ConsoleReader;
 import me.koply.botanic.console.commands.CCPlugins;
 import org.reflections8.Reflections;
 
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.logging.Logger;
 
 public class ConsoleService {
 
-    private static ConsoleService instance;
-    public static ConsoleService getInstance() {
-        if (instance == null) instance = new ConsoleService();
-        return instance;
+    private final ConsoleReader rd;
+    public final ConsoleReader getReader() { return rd; }
+    private final Logger logger;
+    public final Logger getLogger() { return logger; }
+
+    public ConsoleService(ConsoleReader reader, Logger logger) {
+        rd = reader;
+        this.logger = logger;
     }
 
-    private final HashMap<String, IConsoleCommand> consoleCommands = new HashMap<>();
-    public final HashMap<String, IConsoleCommand> getConsoleCommands() { return consoleCommands; }
-
-    private final Scanner sc = new Scanner(System.in);
-    private final Logger log = Main.LOGGER.getParent();
+    private static final HashMap<String, IConsoleCommand> consoleCommands = new HashMap<>();
+    public static HashMap<String, IConsoleCommand> getConsoleCommands() { return consoleCommands; }
 
     public void run() {
-        while (true) {
-            System.out.print("\n> ");
-            String entry = sc.nextLine();
+        try {
+            while (true) {
+                System.out.print("\n> ");
+                String entry = rd.readLine();
 
-            if (entry.equals("exit")) {
-                log.info("See you next time :)");
-                System.exit(1);
+                if (entry.equals("exit")) {
+                    logger.info("See you next time :)");
+                    System.exit(1);
+                }
+
+                if (!consoleCommands.containsKey(entry)) {
+                    logger.info("Invalid command.");
+                    continue;
+                }
+
+                IConsoleCommand.ConsoleParams params = new IConsoleCommand.ConsoleParams(this);
+                consoleCommands.get(entry).handle(params);
             }
-
-            if (!consoleCommands.containsKey(entry)) {
-                log.info("Invalid command.");
-                continue;
-            }
-
-            IConsoleCommand.ConsoleParams params = new IConsoleCommand.ConsoleParams(sc, log);
-            consoleCommands.get(entry).handle(params);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

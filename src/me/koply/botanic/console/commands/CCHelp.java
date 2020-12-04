@@ -11,7 +11,7 @@ public class CCHelp implements IConsoleCommand {
 
     private final HashMap<String, IConsoleCommand> consoleCommands;
     public CCHelp() {
-        consoleCommands =ConsoleService.getInstance().getConsoleCommands();
+        consoleCommands =ConsoleService.getConsoleCommands();
         aliases.add("help");
         register(this);
     }
