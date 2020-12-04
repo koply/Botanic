@@ -1,7 +1,7 @@
-package me.koply.botanic.plugin;
+package me.koply.botanic.bionic;
 
 import me.koply.botanic.bot.command.records.Parameters;
-import me.koply.botanic.plugin.records.PluginFile;
+import me.koply.botanic.bionic.records.BionicFile;
 import me.koply.botanic.util.Gen;
 
 import java.io.File;
@@ -10,15 +10,15 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Logger;
 
-public class PluginManager {
+public class BionicManager {
 
     private final Logger logger;
-    public PluginManager() {
+    public BionicManager() {
         logger = Logger.getLogger("PluginManager");
     }
 
-    public ArrayList<PluginFile> detectPlugins(File folder) {
-        final ArrayList<PluginFile> plugins = new ArrayList<>();
+    public ArrayList<BionicFile> detectPlugins(File folder) {
+        final ArrayList<BionicFile> plugins = new ArrayList<>();
         if (!folder.isDirectory()) {
             throw new IllegalArgumentException("The file parameter must be a folder.");
         }
@@ -38,7 +38,7 @@ public class PluginManager {
                         continue;
                     }
 
-                    plugins.add(new PluginFile(file, jar, jarEntry, gen));
+                    plugins.add(new BionicFile(file, jar, jarEntry, gen));
 
                 } catch (Exception ex) {
                     logger.warning("An error occurred while activating the " + file.getName());
@@ -53,7 +53,7 @@ public class PluginManager {
     URLClassLoader loader = new URLClassLoader(new URL[] {jar url'leri}, this.getClass().getClassLoader());
         Class<?> clazz = loader.findClass("isim");
      */
-    public void enablePlugins(ArrayList<PluginFile> pluginFiles, Parameters params) {
+    public void enablePlugins(ArrayList<BionicFile> bionicFiles, Parameters params) {
 
     }
 

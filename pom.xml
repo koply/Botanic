@@ -73,7 +73,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/Botanic/lib</outputDirectory>
+                            <outputDirectory>${project.build.directory}/Botanic/libs</outputDirectory>
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
@@ -88,7 +88,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
+                            <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>me.koply.botanic.Main</mainClass>
                         </manifest>
                         <manifestEntries>

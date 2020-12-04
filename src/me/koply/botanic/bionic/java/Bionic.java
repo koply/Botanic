@@ -1,4 +1,4 @@
-package me.koply.botanic.plugin.java;
+package me.koply.botanic.bionic.java;
 
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

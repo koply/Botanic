@@ -1,4 +1,4 @@
-package me.koply.botanic.plugin.records;
+package me.koply.botanic.bionic.records;
 
 import me.koply.botanic.util.Gen;
 
@@ -6,9 +6,9 @@ import java.io.File;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class PluginFile {
+public class BionicFile {
 
-    public PluginFile(File file, JarFile jarFile, JarEntry pluginEntry, Gen gen) {
+    public BionicFile(File file, JarFile jarFile, JarEntry pluginEntry, Gen gen) {
         this.file = file;
         this.jarFile = jarFile;
         this.pluginEntry = pluginEntry;
