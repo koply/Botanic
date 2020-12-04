@@ -26,7 +26,7 @@ public class BionicManager {
             if (file.isFile() && file.getName().endsWith(".jar")) {
                 try (JarFile jar = new JarFile(file)) {
 
-                    JarEntry jarEntry = jar.getJarEntry("plugin.yml");
+                    JarEntry jarEntry = jar.getJarEntry("bionic.gen");
                     if (jarEntry == null) {
                         logger.warning(file.getName() + " is couldn't have bionic.gen.");
                         continue;
