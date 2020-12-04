@@ -1,6 +1,8 @@
 package me.koply.botanic.plugin;
 
+import me.koply.botanic.bot.command.records.Parameters;
 import me.koply.botanic.plugin.records.PluginFile;
+import me.koply.botanic.util.LightYml;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,9 +17,8 @@ public class PluginManager {
         logger = Logger.getLogger("PluginManager");
     }
 
-    private final ArrayList<PluginFile> plugins = new ArrayList<>();
-
-    public void detectPlugins(File folder) {
+    public ArrayList<PluginFile> detectPlugins(File folder) {
+        final ArrayList<PluginFile> plugins = new ArrayList<>();
         if (!folder.isDirectory()) {
             throw new IllegalArgumentException("The file parameter must be a folder.");
         }
@@ -31,13 +32,26 @@ public class PluginManager {
                         continue;
                     }
 
+                    LightYml lightYml = new LightYml(jar.getInputStream(jarEntry));
 
+                    if (!lightYml.isOk()) {
+                        logger.warning(file.getName() + "'s plugin.yml file contains syntax errors.");
+                        continue;
+                    }
+
+                    plugins.add(new PluginFile(file, jar, jarEntry, lightYml));
 
                 } catch (Exception ex) {
+                    logger.warning("An error occurred while activating the " + file.getName());
                     ex.printStackTrace();
                 }
             }
         }
+        return plugins;
+    }
+
+    public void enablePlugins(ArrayList<PluginFile> pluginFiles, Parameters params) {
+
     }
 
 }

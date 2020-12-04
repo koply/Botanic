@@ -21,7 +21,6 @@ public class BotanicBot {
 
             Parameters.getInstance().setOwners(config.getOwners())
                     .setCooldown(config.getCooldown())
-                    .setJda(jda)
                     .setPrefix(config.getPrefix())
                     .setReadBotMessages(config.isReadBotMessages());
 

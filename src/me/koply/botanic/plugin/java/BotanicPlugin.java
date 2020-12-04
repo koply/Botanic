@@ -9,6 +9,9 @@ public abstract class BotanicPlugin {
     private final ArrayList<ListenerAdapter> listeners = new ArrayList<>();
     public ArrayList<ListenerAdapter> getListeners() { return listeners; }
 
+    private Package[] commandPackages;
+    public Package[] getCommandPackages() { return commandPackages; }
+
     private BotanicPlugin() {
 
     }
@@ -16,7 +19,7 @@ public abstract class BotanicPlugin {
     abstract void onEnable();
     abstract void onDisable();
 
-    public void registerListeners(ListenerAdapter...adapters) {
+    public void addListener(ListenerAdapter...adapters) {
         listeners.addAll(Arrays.asList(adapters));
     }
 

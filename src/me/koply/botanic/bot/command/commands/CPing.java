@@ -1,7 +1,7 @@
 package me.koply.botanic.bot.command.commands;
 
-import me.koply.kcommando.CommandUtils;
-import me.koply.kcommando.annotations.Command;
+import me.koply.botanic.bot.command.CommandUtils;
+import me.koply.botanic.bot.command.annotation.Command;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
 

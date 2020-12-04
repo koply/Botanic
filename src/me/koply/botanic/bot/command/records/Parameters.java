@@ -1,7 +1,6 @@
 package me.koply.botanic.bot.command.records;
 
-import net.dv8tion.jda.api.JDA;
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -15,37 +14,23 @@ public class Parameters {
         return instance;
     }
 
-    private JDA jda;
-    private String packagePath, prefix;
     private long cooldown = 0L;
-    private List<String> owners;
-    private HashMap<String, CommandToRun> commandMethods;
     private boolean readBotMessages;
+    private String prefix;
+    private ArrayList<String> packagePaths = new ArrayList<>();
+    private ArrayList<String> owners = new ArrayList<>();
+    private HashMap<String, CommandToRun> commandMethods = new HashMap<>();
 
     public HashMap<String, CommandToRun> getCommandMethods() {
         return commandMethods;
     }
 
-    public Parameters setCommandMethods(HashMap<String, CommandToRun> commandMethods) {
-        this.commandMethods = commandMethods;
-        return this;
+    public ArrayList<String> getPackagePaths() {
+        return packagePaths;
     }
 
-    public JDA getJda() {
-        return jda;
-    }
-
-    public Parameters setJda(JDA jda) {
-        this.jda = jda;
-        return this;
-    }
-
-    public String getPackagePath() {
-        return packagePath;
-    }
-
-    public Parameters setPackagePath(String packagePath) {
-        this.packagePath = packagePath;
+    public Parameters addPackagePath(String path) {
+        packagePaths.add(path);
         return this;
     }
 
@@ -72,7 +57,7 @@ public class Parameters {
     }
 
     public Parameters setOwners(String[] owners) {
-        this.owners = Arrays.asList(owners);
+        this.owners.addAll(Arrays.asList(owners));
         return this;
     }
 
