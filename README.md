@@ -3,8 +3,8 @@ Moduler Discord bot engine.
 
 Bot file path scheme:
 ```
-| /lib
-| /plugins
+| /libs
+| /bionics
 | Botanic.jar
 | config.json
 ```
