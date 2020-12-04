@@ -1,5 +1,7 @@
 package me.koply.botanic;
 
+import me.koply.botanic.bot.BotanicBot;
+import me.koply.botanic.console.ConsoleService;
 import me.koply.botanic.data.DataManager;
 import me.koply.botanic.data.records.Config;
 
@@ -29,6 +31,11 @@ public class Main {
 
     private Main() {
         config = DataManager.getInstance().readConfig();
+
+        BotanicBot botanicBot = new BotanicBot(config);
+        botanicBot.start();
+
+        ConsoleService.getInstance().run();
     }
 
     public static void main(String[] args) {

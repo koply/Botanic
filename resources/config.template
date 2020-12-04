@@ -1,6 +1,7 @@
 {
   "token": "",
-  "prefix": 5000,
+  "cooldown": 5000,
+  "prefix": ".",
   "owners": [""],
   "readBotMessages": false
 }

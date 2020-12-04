@@ -2,8 +2,6 @@ package me.koply.botanic.console.commands;
 
 import me.koply.botanic.console.IConsoleCommand;
 
-import java.util.Scanner;
-
 public class CCPlugins implements IConsoleCommand {
 
     public CCPlugins() {
@@ -12,7 +10,7 @@ public class CCPlugins implements IConsoleCommand {
     }
 
     @Override
-    public void handle(Scanner sc) {
+    public void handle(ConsoleParams p) {
 
     }
 }
