@@ -2,7 +2,7 @@ package me.koply.botanic.plugin;
 
 import me.koply.botanic.bot.command.records.Parameters;
 import me.koply.botanic.plugin.records.PluginFile;
-import me.koply.botanic.util.LightYml;
+import me.koply.botanic.util.Gen;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,18 +28,17 @@ public class PluginManager {
 
                     JarEntry jarEntry = jar.getJarEntry("plugin.yml");
                     if (jarEntry == null) {
-                        logger.warning(file.getName() + " is couldn't have plugin.yml.");
+                        logger.warning(file.getName() + " is couldn't have bionic.gen.");
                         continue;
                     }
 
-                    LightYml lightYml = new LightYml(jar.getInputStream(jarEntry));
-
-                    if (!lightYml.isOk()) {
-                        logger.warning(file.getName() + "'s plugin.yml file contains syntax errors.");
+                    Gen gen = new Gen(jar.getInputStream(jarEntry));
+                    if (!gen.isOk()) {
+                        logger.warning(file.getName() + "'s bionic.gen file contains syntax errors.");
                         continue;
                     }
 
-                    plugins.add(new PluginFile(file, jar, jarEntry, lightYml));
+                    plugins.add(new PluginFile(file, jar, jarEntry, gen));
 
                 } catch (Exception ex) {
                     logger.warning("An error occurred while activating the " + file.getName());
@@ -50,6 +49,10 @@ public class PluginManager {
         return plugins;
     }
 
+    /*
+    URLClassLoader loader = new URLClassLoader(new URL[] {jar url'leri}, this.getClass().getClassLoader());
+        Class<?> clazz = loader.findClass("isim");
+     */
     public void enablePlugins(ArrayList<PluginFile> pluginFiles, Parameters params) {
 
     }

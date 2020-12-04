@@ -1,6 +1,6 @@
 package me.koply.botanic.plugin.records;
 
-import me.koply.botanic.util.LightYml;
+import me.koply.botanic.util.Gen;
 
 import java.io.File;
 import java.util.jar.JarEntry;
@@ -8,17 +8,17 @@ import java.util.jar.JarFile;
 
 public class PluginFile {
 
-    public PluginFile(File file, JarFile jarFile, JarEntry pluginEntry, LightYml yaml) {
+    public PluginFile(File file, JarFile jarFile, JarEntry pluginEntry, Gen gen) {
         this.file = file;
         this.jarFile = jarFile;
         this.pluginEntry = pluginEntry;
-        yamlFile = yaml;
+        this.gen = gen;
     }
 
     private final File file;
     private final JarFile jarFile;
     private final JarEntry pluginEntry;
-    private final LightYml yamlFile;
+    private final Gen gen;
 
     public File getFile() {
         return file;
@@ -32,7 +32,7 @@ public class PluginFile {
         return pluginEntry;
     }
 
-    public LightYml getYamlFile() {
-        return yamlFile;
+    public Gen getGen() {
+        return gen;
     }
 }
