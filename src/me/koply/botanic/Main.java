@@ -1,46 +1,41 @@
 package me.koply.botanic;
 
-import jline.console.ConsoleReader;
 import me.koply.botanic.bot.BotanicBot;
-import me.koply.botanic.cli.BotanicLogger;
-import me.koply.botanic.cli.LoggingOutputStream;
-import me.koply.botanic.console.ConsoleService;
 import me.koply.botanic.data.DataManager;
 import me.koply.botanic.data.records.Config;
-import org.fusesource.jansi.AnsiConsole;
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.logging.Level;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 public class Main {
-
-    public static Logger LOGGER;
+    public static Logger LOGGER = Logger.getLogger("Botanic");
     public static Config config;
 
-    private Main() throws IOException {
-        // initializing io things
-        System.setProperty( "library.jansi.version", "Botanic" );
-        AnsiConsole.systemInstall();
+    static {
+        LOGGER.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new Formatter() {
+            private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
+            public String format(LogRecord record) {
+                return String.format("[%s %s] %s -> %s\n", this.formatter.format(new Date(record.getMillis())), record.getLevel(), record.getLoggerName(), record.getMessage());
+            }
+        });
+        LOGGER.addHandler(consoleHandler);
+    }
 
-        ConsoleReader consoleReader = new ConsoleReader();
-        consoleReader.setExpandEvents(false);
-
-        LOGGER = new BotanicLogger("Botanic", consoleReader);
-        System.setErr(new PrintStream(new LoggingOutputStream(LOGGER, Level.SEVERE), true));
-        System.setOut(new PrintStream(new LoggingOutputStream(LOGGER, Level.INFO), true));
-        // io things end
-
+    private Main() {
         config = DataManager.getInstance().readConfig();
 
         BotanicBot botanicBot = new BotanicBot(config);
         botanicBot.start();
-
-        new ConsoleService(consoleReader, LOGGER).run();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Main();
     }
 }

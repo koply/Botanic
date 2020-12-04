@@ -18,9 +18,10 @@ public class DataManager {
     // end instance
 
     private final File config = new File("config.json");
-    private final String configTemplate = Util.readFile(new File(DataManager.class.getResource("/config.template").getFile()));
+    private final String configTemplate;
 
     public DataManager() {
+        configTemplate = Util.readFile(new File(DataManager.class.getResource("/config.template").getFile()));
         if (config.exists()) return;
         try {
             if (config.createNewFile()) {

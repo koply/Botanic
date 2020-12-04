@@ -1,4 +1,4 @@
-package me.koply.botanic.bot.commands;
+package me.koply.botanic.bot.command.commands;
 
 import me.koply.kcommando.CommandUtils;
 import me.koply.kcommando.annotations.Command;

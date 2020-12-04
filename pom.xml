@@ -11,7 +11,6 @@
     <name>Botanic Discord Bot</name>
 
     <properties>
-        <kcommando.version>2.5</kcommando.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -21,7 +20,7 @@
 
         <resources>
             <resource>
-                <directory>res</directory>
+                <directory>resources</directory>
             </resource>
         </resources>
 
@@ -110,12 +109,6 @@
             <version>4.2.0_209</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.github.MusaBrt</groupId>
-            <artifactId>KCommando</artifactId>
-            <version>${kcommando.version}</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
@@ -123,24 +116,9 @@
             <version>20201115</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.fusesource.jansi</groupId>
-            <artifactId>jansi</artifactId>
-            <version>2.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>jline</groupId>
-            <artifactId>jline</artifactId>
-            <version>2.14.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>21.0</version>
-        </dependency>
-
+        <!--
+        This project implements KCommando framework inside.
+        -->
     </dependencies>
 
     <repositories>
