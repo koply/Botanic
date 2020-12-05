@@ -1,14 +1,10 @@
 package me.koply.botanic.bot.command.records;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Parameters {
 
     private static Parameters instance;
-
     public static Parameters getInstance() {
         if (instance == null) instance = new Parameters();
         return instance;
@@ -17,12 +13,12 @@ public class Parameters {
     private long cooldown = 0L;
     private boolean readBotMessages;
     private String prefix;
-    private ArrayList<String> packagePaths = new ArrayList<>();
-    private ArrayList<String> owners = new ArrayList<>();
-    private HashMap<String, CommandToRun> commandMethods = new HashMap<>();
+    private final ArrayList<String> packagePaths = new ArrayList<>();
+    private final HashSet<String> owners = new HashSet<>();
+    private final HashMap<String, CommandToRun> commandClasses = new HashMap<>();
 
-    public HashMap<String, CommandToRun> getCommandMethods() {
-        return commandMethods;
+    public HashMap<String, CommandToRun> getCommandClasses() {
+        return commandClasses;
     }
 
     public ArrayList<String> getPackagePaths() {
@@ -52,7 +48,7 @@ public class Parameters {
         return this;
     }
 
-    public List<String> getOwners() {
+    public HashSet<String> getOwners() {
         return owners;
     }
 

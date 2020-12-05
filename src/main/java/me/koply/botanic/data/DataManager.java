@@ -21,7 +21,7 @@ public class DataManager {
     private final String configTemplate;
 
     public DataManager() {
-        configTemplate = Util.readFile(new File(DataManager.class.getResource("/config.template").getFile()));
+        configTemplate = Util.readFile(getClass().getClassLoader().getResourceAsStream("config.template"));
         if (config.exists()) return;
         try {
             if (config.createNewFile()) {

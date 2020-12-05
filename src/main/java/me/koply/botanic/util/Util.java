@@ -27,6 +27,21 @@ public final class Util {
         }
     }
 
+    public static String readFile(InputStream is) {
+        final StringBuilder sb = new StringBuilder();
+        try {
+            final BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
+        } finally {
+            return sb.toString();
+        }
+    }
+
     public static void writeFile(File file, String str) {
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(file), StandardCharsets.UTF_8))) {

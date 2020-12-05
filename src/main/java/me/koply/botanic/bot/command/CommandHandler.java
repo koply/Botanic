@@ -1,5 +1,6 @@
 package me.koply.botanic.bot.command;
 
+import me.koply.botanic.Main;
 import me.koply.botanic.bot.command.records.CommandToRun;
 import me.koply.botanic.bot.command.records.Parameters;
 import me.koply.botanic.util.CronService;
@@ -26,8 +27,8 @@ public final class CommandHandler extends ListenerAdapter {
 
     public CommandHandler(Parameters params) {
         this.params = params;
-        commandsMap = params.getCommandMethods();
-        logger = Logger.getLogger("CommandHandler");
+        commandsMap = params.getCommandClasses();
+        logger = Main.LOGGER;
 
         CronService.getInstance().addRunnable(() -> {
             long current = System.currentTimeMillis();
