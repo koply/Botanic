@@ -1,13 +1,8 @@
 package me.koply.fbionic;
 
 import me.koply.botanic.bionic.java.Bionic;
-import me.koply.botanic.bot.command.CommandUtils;
-import me.koply.botanic.bot.command.annotation.Command;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import org.jetbrains.annotations.NotNull;
 
-@Command(names = {"bionic"}, description = "Hello World!")
-public class Main extends Bionic implements CommandUtils {
+public class Main extends Bionic {
 
     public Main() {
         System.out.println("Called the first bionics constructor!");
@@ -21,11 +16,5 @@ public class Main extends Bionic implements CommandUtils {
 
     @Override
     public void onDisable() {
-
-    }
-
-    @Override
-    public void handle(@NotNull MessageReceivedEvent e) {
-        e.getChannel().sendMessage(embed("Hello World!")).queue();
     }
 }

@@ -11,19 +11,18 @@ import java.util.jar.JarFile;
 
 public class BionicFile {
 
-    public BionicFile(File file, JarFile jarFile, JarEntry pluginEntry, Gen gen, Class<?> mainClass) {
+    public BionicFile(File file, JarFile jarFile, JarEntry pluginEntry, Gen gen) {
         this.file = file;
         this.jarFile = jarFile;
         this.pluginEntry = pluginEntry;
         this.gen = gen;
-        this.mainClass = mainClass;
     }
 
     private final File file;
     private final JarFile jarFile;
     private final JarEntry pluginEntry;
     private final Gen gen;
-    private final Class<?> mainClass;
+    private Class<?> mainClass;
     private Bionic instance;
     private HashSet<CommandToRun> commandToRuns = new HashSet<>();
 
@@ -41,6 +40,11 @@ public class BionicFile {
 
     public Gen getGen() {
         return gen;
+    }
+
+    public BionicFile setMainClass(Class<?> mainClass) {
+        this.mainClass = mainClass;
+        return this;
     }
 
     public Class<?> getMainClass() {

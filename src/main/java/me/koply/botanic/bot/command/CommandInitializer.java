@@ -33,9 +33,11 @@ public final class CommandInitializer {
         int bionicCounter = 0;
         final HashMap<String, CommandToRun> commandsMap = params.getCommandClasses();
         for (BionicFile bionic : bionics) {
-            Reflections reflections = new Reflections(bionic.getInstance().getCommandsPackage().getName());
-            Set<Class<? extends CommandUtils>> classes = reflections.getSubTypesOf(CommandUtils.class);
 
+            final Reflections reflections = new Reflections(bionic.getInstance().getCommandsPackage(),
+                    bionic.getInstance().getClass().getClassLoader());
+            Set<Class<? extends CommandUtils>> classes = reflections.getSubTypesOf(CommandUtils.class);
+            logger.info(classes.size() +"");
             for (Class<? extends CommandUtils> clazz : classes) {
                 Command cmdAnnotation = clazz.getAnnotation(Command.class);
                 if (cmdAnnotation == null) {

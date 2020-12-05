@@ -48,7 +48,7 @@ public class Main {
 
         bionicManager = new BionicManager(bionicsFolder);
         final ArrayList<BionicFile> bionicFiles = bionicManager.detectBionics();
-        bionicManager.enablePlugins(bionicFiles);
+        bionicManager.enableBionics(bionicFiles);
 
         BotanicBot botanicBot = new BotanicBot(config.getToken(), bionicFiles);
         botanicBot.start();

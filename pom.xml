@@ -16,11 +16,11 @@
 
     <build>
         <defaultGoal>clean package</defaultGoal>
-        <sourceDirectory>src</sourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
 
         <resources>
             <resource>
-                <directory>resources</directory>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
 
@@ -50,11 +50,12 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/target/Botanic</outputDirectory>
+                            <outputDirectory>${project.basedir}/target/Botanic</outputDirectory>
+                            <includeEmptyDirs>true</includeEmptyDirs>
                             <resources>
                                 <resource>
-                                    <directory>resources</directory>
-                                    <filtering>true</filtering>
+                                    <directory>${basedir}/src/main/resources</directory>
+                                    <filtering>false</filtering>
                                 </resource>
                             </resources>
                         </configuration>
@@ -114,6 +115,12 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20201115</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.oneandone.reflections8</groupId>
+            <artifactId>reflections8</artifactId>
+            <version>0.11.5</version>
         </dependency>
 
         <!--
