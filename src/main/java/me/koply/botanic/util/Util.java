@@ -59,6 +59,12 @@ public final class Util {
                 .setDescription(txt).build();
     }
 
+    public static EmbedBuilder basicEmbed(Object o) {
+        return new EmbedBuilder()
+                .setDescription(o.toString())
+                .setColor(randomColor());
+    }
+
     public static String getKalanSure(final long ms) {
         final long millis = ms % 1000;
         final long second = (ms / 1000) % 60;

@@ -56,7 +56,7 @@ public class DataManager {
 
             return new Config(tempconfig.getString("token"), tempconfig.getString("prefix"),
                     tempconfig.getLong("cooldown"), tempconfig.getBoolean("readBotMessages"),
-                    owners);
+                    owners, tempconfig.getBoolean("caseSensitivity"));
         } catch (Throwable t) {
             t.printStackTrace();
             Main.LOGGER.warning("file could not be readed due to an error.");

@@ -23,10 +23,12 @@ public class BionicManager {
             throw new IllegalArgumentException("The file parameter must be a folder");
         }
         logger = Main.LOGGER;
+        logger.info("Bionics folder found.");
         this.folder = folder;
     }
 
     public final ArrayList<BionicFile> detectBionics() {
+        logger.info("Bionics are detecting...");
         final ArrayList<BionicFile> bionics = new ArrayList<>();
         final ArrayList<URL> urlArray = new ArrayList<>();
 
@@ -37,7 +39,7 @@ public class BionicManager {
 
                 JarEntry jarEntry = jar.getJarEntry("bionic.gen");
                 if (jarEntry == null) {
-                    logger.warning(file.getName() + " is couldn't have bionic.gen.");
+                    logger.warning(file.getName() + "'s bionic.gen file was not found.");
                     continue;
                 }
 
@@ -62,7 +64,8 @@ public class BionicManager {
 
         for (BionicFile bionic : bionics) {
             try {
-                Class<?> clazz = Class.forName(bionic.getGen().getAttributes().get("main"), true, loader);
+                final Class<?> clazz = Class.forName(bionic.getGen().getAttributes().get("main"), true, loader);
+                logger.info("Main class successfully found at " + bionic.getGen().getAttributes().get("name"));
                 bionic.setMainClass(clazz);
             } catch (ClassNotFoundException classNotFoundException) {
                 logger.warning("Main class named as " + bionic.getGen().getAttributes().get("main") + " is not found in the " + bionic.getFile().getName());
@@ -73,20 +76,25 @@ public class BionicManager {
     }
 
     public final void enableBionics(ArrayList<BionicFile> bionicFiles) {
+        logger.info("Detected bionics are enabling...");
         final ArrayList<BionicFile> toremove = new ArrayList<>();
         for (BionicFile bionic : bionicFiles) {
+            final String bionicName = bionic.getGen().getAttributes().get("name");
             if (bionic.getMainClass().getSuperclass() != Bionic.class) {
-                logger.warning(bionic.getFile().getName() + " could not be enabled. Main class is not extends Bionic.");
+                logger.warning(bionicName + " could not be enabled. Main class is not extends Bionic.");
                 toremove.add(bionic);
                 continue;
             }
 
             try {
-                Bionic instance = (Bionic) bionic.getMainClass().newInstance();
+                logger.info(bionicName + "'s constructor calling...");
+                Bionic instance = (Bionic) bionic.getMainClass().getDeclaredConstructor().newInstance();
+                logger.info(bionicName + " enabling...");
                 instance.onEnable();
+                logger.info(bionicName + " is enabled!");
                 bionic.setInstance(instance);
             } catch (Exception e) {
-                logger.warning(bionic.getFile().getName() + " could not be enabled.");
+                logger.warning(bionicName + " could not be enabled.");
                 toremove.add(bionic);
             }
         }

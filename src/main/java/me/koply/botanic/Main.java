@@ -3,17 +3,16 @@ package me.koply.botanic;
 import me.koply.botanic.bionic.BionicManager;
 import me.koply.botanic.bionic.records.BionicFile;
 import me.koply.botanic.bot.BotanicBot;
-import me.koply.botanic.bot.command.CommandInitializer;
-import me.koply.botanic.bot.command.records.Parameters;
+import me.koply.botanic.bot.kcommando.Params;
 import me.koply.botanic.data.DataManager;
 import me.koply.botanic.data.records.Config;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
@@ -38,23 +37,29 @@ public class Main {
         LOGGER.addHandler(consoleHandler);
     }
 
-    private Main() throws MalformedURLException {
+    private Main() {
         createBionicsFolder();
         config = DataManager.getInstance().readConfig();
-        Parameters.getInstance().setOwners(config.getOwners())
+        Params params = new Params().setOwners(config.getOwners())
                 .setCooldown(config.getCooldown())
                 .setPrefix(config.getPrefix())
                 .setReadBotMessages(config.isReadBotMessages());
 
+        if (config.isCaseSensitivity()) {
+            params.setCaseSensitivity(Locale.getDefault());
+        }
+
+        LOGGER.info("BionicManager running...");
         bionicManager = new BionicManager(bionicsFolder);
+
         final ArrayList<BionicFile> bionicFiles = bionicManager.detectBionics();
         bionicManager.enableBionics(bionicFiles);
 
-        BotanicBot botanicBot = new BotanicBot(config.getToken(), bionicFiles);
+        BotanicBot botanicBot = new BotanicBot(config.getToken(), params, bionicFiles);
         botanicBot.start();
     }
 
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) {
         new Main();
     }
 

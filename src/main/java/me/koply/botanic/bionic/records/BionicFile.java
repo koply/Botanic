@@ -1,11 +1,9 @@
 package me.koply.botanic.bionic.records;
 
 import me.koply.botanic.bionic.java.Bionic;
-import me.koply.botanic.bot.command.records.CommandToRun;
 import me.koply.botanic.util.Gen;
 
 import java.io.File;
-import java.util.HashSet;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -24,7 +22,7 @@ public class BionicFile {
     private final Gen gen;
     private Class<?> mainClass;
     private Bionic instance;
-    private HashSet<CommandToRun> commandToRuns = new HashSet<>();
+
 
     public File getFile() {
         return file;
@@ -60,12 +58,4 @@ public class BionicFile {
         return instance;
     }
 
-    public BionicFile addCommandToRun(CommandToRun commandToRun) {
-        commandToRuns.add(commandToRun);
-        return this;
-    }
-
-    public HashSet<CommandToRun> getCommandToRuns() {
-        return commandToRuns;
-    }
 }

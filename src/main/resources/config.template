@@ -3,5 +3,6 @@
   "cooldown": 5000,
   "prefix": ".",
   "owners": [""],
-  "readBotMessages": false
+  "readBotMessages": false,
+  "caseSensitivity": false
 }

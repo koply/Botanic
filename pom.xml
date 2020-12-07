@@ -117,11 +117,11 @@
             <version>20201115</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>net.oneandone.reflections8</groupId>
             <artifactId>reflections8</artifactId>
             <version>0.11.5</version>
-        </dependency>
+        </dependency>-->
 
         <!--
         This project implements KCommando framework inside.
