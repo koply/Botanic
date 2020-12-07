@@ -3,9 +3,11 @@
 [![Build Status](https://travis-ci.com/musabrt/botanic.svg?branch=master)](https://travis-ci.com/musabrt/botanic)
 [![jitpack-version](https://jitpack.io/v/MusaBrt/Botanic.svg)](https://jitpack.io/#MusaBrt/Botanic)
 ![LICENSE](https://img.shields.io/github/license/MusaBrt/Botanic?style=flat)
-Moduler Discord bot engine.
+Moduler 
 
-Bot file path scheme:
+Discord bot engine.
+
+#### Bot file path scheme:
 ```
 | /libs
 | /bionics
