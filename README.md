@@ -20,7 +20,7 @@ git clone https://github.com/MusaBrt/Botanic
 cd botanic/
 mvn install
 ```
-After this commands, your Botanic build ready in `/target/Botanic/`
+After this commands, your Botanic build ready in `./target/Botanic/`
 
 ## How To Install For Develop Bionic
 ### With Maven:
