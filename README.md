@@ -1,6 +1,6 @@
+![](http://image-write-app.herokuapp.com/?x=880&y=33&size=130&text=koply&url=https://image-write-app.herokuapp.com/?x=65&y=25&size=150&text=Botanic&url=https%3A%2F%2Fimage-write-app.herokuapp.com%2F%3Fx%3D178%26y%3D25%26size%3D150%26text%3DBotanic%26url%3Dhttps%3A%2F%2Fwww.afcapital.ru%2Fa%2Fpgs%2Fimages%2Fcontent-grid-bg.png)
 [![](https://jitpack.io/v/MusaBrt/Botanic.svg)](https://jitpack.io/#MusaBrt/Botanic)
 
-# Botanic
 Moduler Discord bot engine.
 
 Bot file path scheme:
