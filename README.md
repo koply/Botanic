@@ -1,6 +1,8 @@
 ![](http://image-write-app.herokuapp.com/?x=880&y=33&size=130&text=koply&url=https%3A%2F%2Fimage-write-app.herokuapp.com%2F%3Fx%3D185%26y%3D25%26size%3D150%26text%3DBotanic%26url%3Dhttps%3A%2F%2Fwww.afcapital.ru%2Fa%2Fpgs%2Fimages%2Fcontent-grid-bg.png)
-[![](https://jitpack.io/v/MusaBrt/Botanic.svg)](https://jitpack.io/#MusaBrt/Botanic)
-
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/MusaBrt/Botanic.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MusaBrt/Botanic/context:java)
+[![Build Status](https://travis-ci.com/musabrt/botanic.svg?branch=master)](https://travis-ci.com/musabrt/botanic)
+[![jitpack-version](https://jitpack.io/v/MusaBrt/Botanic.svg)](https://jitpack.io/#MusaBrt/Botanic)
+![LICENSE](https://img.shields.io/github/license/MusaBrt/Botanic?style=flat)
 Moduler Discord bot engine.
 
 Bot file path scheme:
