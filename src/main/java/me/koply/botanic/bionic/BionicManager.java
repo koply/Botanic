@@ -8,15 +8,21 @@ import me.koply.botanic.util.Gen;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-public class BionicManager {
+public final class BionicManager {
 
     private final Logger logger;
-    private final File folder;
+    private final File bionicsFolder;
 
     public BionicManager(File folder) throws IllegalArgumentException {
         if (!folder.isDirectory()) {
@@ -24,7 +30,7 @@ public class BionicManager {
         }
         logger = Main.LOGGER;
         logger.info("Bionics folder found.");
-        this.folder = folder;
+        this.bionicsFolder = folder;
     }
 
     public final ArrayList<BionicFile> detectBionics() {
@@ -32,7 +38,7 @@ public class BionicManager {
         final ArrayList<BionicFile> bionics = new ArrayList<>();
         final ArrayList<URL> urlArray = new ArrayList<>();
 
-        for (File file : folder.listFiles()) {
+        for (File file : bionicsFolder.listFiles()) {
             if (!file.isFile() && !file.getName().endsWith(".jar")) continue;
 
             try (JarFile jar = new JarFile(file)) {
@@ -87,6 +93,11 @@ public class BionicManager {
             }
 
             try {
+                final File dataFolder = new File(bionicsFolder.getPath() + bionicName + "/");
+                dataFolder.mkdir();
+                final BionicInfo info = new BionicInfo(dataFolder, bionicName, getLogger(bionicName));
+                CargoTruck.setDelivery(info);
+
                 logger.info(bionicName + "'s constructor calling...");
                 Bionic instance = (Bionic) bionic.getMainClass().getDeclaredConstructor().newInstance();
                 logger.info(bionicName + " enabling...");
@@ -102,6 +113,23 @@ public class BionicManager {
         for (BionicFile b : toremove) {
             bionicFiles.remove(b);
         }
+    }
+
+
+    private Logger getLogger(String name) {
+        final Logger logger = Logger.getLogger(name);
+
+        logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new Formatter() {
+            private final DateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS");
+            public String format(LogRecord record) {
+                return String.format("[%s %s] %s -> %s\n", this.formatter.format(new Date(record.getMillis())), record.getLevel(), record.getLoggerName(), record.getMessage());
+            }
+        });
+        logger.addHandler(consoleHandler);
+
+        return logger;
     }
 
 }

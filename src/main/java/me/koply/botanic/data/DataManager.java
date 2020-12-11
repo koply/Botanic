@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 
-public class DataManager {
+public final class DataManager {
 
     // instance
     private static DataManager instance;

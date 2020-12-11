@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class BionicFile {
+public final class BionicFile {
 
     public BionicFile(File file, JarFile jarFile, JarEntry pluginEntry, Gen gen) {
         this.file = file;
