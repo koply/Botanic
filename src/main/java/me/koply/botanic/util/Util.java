@@ -15,11 +15,17 @@ public final class Util {
     public static String readFile(File file) {
         final StringBuilder sb = new StringBuilder();
         try {
-            final BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+            final FileInputStream fs = new FileInputStream(file);
+            final InputStreamReader isr = new InputStreamReader(fs, StandardCharsets.UTF_8);
+            final BufferedReader br = new BufferedReader(isr);
             String line = null;
             while ((line = br.readLine()) != null) {
                 sb.append(line).append("\n");
             }
+            
+            fs.close();
+            isr.close();
+            br.close();
         } catch (Throwable t) {
             t.printStackTrace();
         } finally {
@@ -30,11 +36,16 @@ public final class Util {
     public static String readFile(InputStream is) {
         final StringBuilder sb = new StringBuilder();
         try {
-            final BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+            final InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
+            final BufferedReader br = new BufferedReader(isr);
             String line = null;
             while ((line = br.readLine()) != null) {
                 sb.append(line).append("\n");
             }
+            
+            is.close();
+            isr.close();
+            br.close();
         } catch (Throwable t) {
             t.printStackTrace();
         } finally {
