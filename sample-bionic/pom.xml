@@ -6,7 +6,7 @@
 
     <groupId>me.koply</groupId>
     <artifactId>sample-bionic</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,17 +14,16 @@
 
     <dependencies>
         <dependency>
-            <groupId>net.dv8tion</groupId>
-            <artifactId>JDA</artifactId>
-            <version>4.2.0_209</version>
-            <scope>compile</scope>
+            <groupId>me.koply</groupId>
+            <artifactId>bionic</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>me.koply</groupId>
-            <artifactId>botanic</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../target/Botanic/Botanic.jar</systemPath>
+            <artifactId>core</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -32,11 +31,6 @@
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
-        </repository>
-        <repository>
-            <id>jcenter</id>
-            <name>jcenter-bintray</name>
-            <url>https://jcenter.bintray.com</url>
         </repository>
     </repositories>
 
@@ -78,7 +72,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
-                    <outputDirectory>${project.basedir}/../target/Botanic/bionics</outputDirectory>
+                    <outputDirectory>${project.basedir}/../core/target/Botanic/bionics</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>

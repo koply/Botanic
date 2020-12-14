@@ -1,16 +1,15 @@
 package me.koply.fbionic;
 
-
-import me.koply.botanic.bot.kcommando.Command;
-import me.koply.botanic.bot.kcommando.internal.Commander;
 import me.koply.botanic.util.Util;
+import me.koply.kcommando.integration.impl.jda.JDACommand;
+import me.koply.kcommando.internal.Commando;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
 
-@Commander(name = "Ping",
+@Commando(name = "Ping",
         aliases = "ping",
         description = "Pong!")
-public class PingCommand extends Command {
+public class PingCommand extends JDACommand {
 
     @Override
     public boolean handle(@NotNull MessageReceivedEvent e) {
