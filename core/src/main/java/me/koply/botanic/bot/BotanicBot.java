@@ -35,7 +35,10 @@ public class BotanicBot {
             jda.awaitReady();
             Main.LOGGER.info("------ Bot launched! ------");
 
-            kcm = new KCommando(new BotRunner(jda), new CustomInitializer(params));
+            BotRunner integration = new BotRunner(jda);
+            params.setIntegration(integration);
+
+            kcm = new KCommando(integration, new CustomInitializer(params));
             kcm.build();
 
             for (BionicFile bionic : bionicFiles) {

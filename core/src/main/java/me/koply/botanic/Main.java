@@ -45,6 +45,7 @@ public class Main {
         params.setCooldown(config.getCooldown());
         params.setPrefix(config.getPrefix());
         params.setReadBotMessages(config.isReadBotMessages());
+        params.setPackagePath("");
 
         if (config.isCaseSensitivity()) {
             params.setCaseSensitivity(Locale.getDefault());
